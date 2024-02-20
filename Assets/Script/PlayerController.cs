@@ -24,50 +24,53 @@ public class PlayerController : MonoBehaviour
     private float distanceTravelled;
     private float xMovement;
     private bool canMove;
-   
-    private void StartRuning()
-    {
-        canMove = true;
-        animator.SetBool("run", true);
-    }
 
-    bool flag = false;
+    private bool init;
 
     private void Update()
     {
-        if(canMove)
+        if(GameManager.instance.gameState == GameState.Playing)
         {
-            distanceTravelled += speed * Time.deltaTime;
-            transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-        }
+            if(!init)
+            {
+                init = true;
+                canMove = true;
+                animator.SetBool("run", true);
+            }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            startPosition = Input.mousePosition;
-            prevPosition = startPosition;
-            StartRuning();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            endPosition = Input.mousePosition;
+            if (canMove)
+            {
+                distanceTravelled += speed * Time.deltaTime;
+                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
 
-            Vector3 swipeDirection = endPosition - prevPosition;
-            float swipeDistance = swipeDirection.magnitude;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    startPosition = Input.mousePosition;
+                    prevPosition = startPosition;
+                }
+                else if (Input.GetMouseButton(0))
+                {
+                    endPosition = Input.mousePosition;
 
-            float directionModifier = swipeDirection.x > 0 ? 1 : -1;
+                    Vector3 swipeDirection = endPosition - prevPosition;
+                    float swipeDistance = swipeDirection.magnitude;
 
-            xMovement = playerTransform.localPosition.x + (directionModifier * swipeDistance * swipeSpeed * Time.deltaTime);
-            xMovement = Mathf.Clamp(xMovement, -xLimit, xLimit);
-            playerTransform.localPosition = new Vector3(xMovement, 0, 0);
+                    float directionModifier = swipeDirection.x > 0 ? 1 : -1;
 
-            prevPosition = endPosition;
-        }
+                    xMovement = playerTransform.localPosition.x + (directionModifier * swipeDistance * swipeSpeed * Time.deltaTime);
+                    xMovement = Mathf.Clamp(xMovement, -xLimit, xLimit);
+                    playerTransform.localPosition = new Vector3(xMovement, 0, 0);
 
-        if(transform.position.z >= pathCreator.path.length && !flag)
-        {
-            flag = true;
-            canMove = false;
-            animator.SetTrigger("victory");
+                    prevPosition = endPosition;
+                }
+
+                if (transform.position.z >= pathCreator.path.length)
+                {
+                    canMove = false;
+                    animator.SetTrigger("victory");
+                    animator.SetBool("run", false);
+                }
+            }
         }
     }
 }

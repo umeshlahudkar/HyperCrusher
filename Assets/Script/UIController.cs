@@ -10,4 +10,10 @@ public class UIController : MonoBehaviour
     {
         finger.SetActive(true);
     }
+
+    public void OnSwipeFingerClick()
+    {
+        GameManager.instance.gameState = GameState.Playing;
+        finger.SetActive(false);
+    }
 }

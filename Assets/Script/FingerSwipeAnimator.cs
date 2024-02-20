@@ -19,6 +19,7 @@ public class FingerSwipeAnimator : MonoBehaviour
 
     private void OnEnable()
     {
+        finger.localPosition = new Vector3(0, finger.localPosition.y, 0);
         SetInitialFingerScale();
         CalculateMinMaxPositions();
         StartFingerAnimation();
