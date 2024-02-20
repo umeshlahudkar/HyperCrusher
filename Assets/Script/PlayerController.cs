@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Collider playerCollider;
 
     private Vector3 startPosition;
     private Vector3 endPosition;
@@ -72,5 +73,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        canMove = false;
+        animator.SetTrigger("die");
+        playerCollider.enabled = false;
+        rb.useGravity = false;
     }
 }
