@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation.Examples;
 using PathCreation;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider playerCollider;
+
+    [SerializeField] private TextMeshPro counterText;
 
     private Vector3 startPosition;
     private Vector3 endPosition;
@@ -27,6 +30,12 @@ public class PlayerController : MonoBehaviour
     private bool canMove;
 
     private bool init;
+    private int pointsCount;
+
+    private void Start()
+    {
+        UpdatePoint(0);
+    }
 
     private void Update()
     {
@@ -77,9 +86,22 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        canMove = false;
-        animator.SetTrigger("die");
-        playerCollider.enabled = false;
-        rb.useGravity = false;
+        IConsumable consumable = other.gameObject.GetComponent<IConsumable>();
+        if(consumable != null)
+        {
+            int consumePoint = consumable.Consume();
+            UpdatePoint(consumePoint);
+        }
+
+        //canMove = false;
+        //animator.SetTrigger("die");
+        //playerCollider.enabled = false;
+        //rb.useGravity = false;
+    }
+
+    public void UpdatePoint(int points)
+    {
+        pointsCount += points;
+        counterText.text = pointsCount.ToString();
     }
 }
