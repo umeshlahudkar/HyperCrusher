@@ -91,11 +91,34 @@ public class PlayerController : MonoBehaviour
         {
             int consumePoint = consumable.Consume();
             UpdatePoint(consumePoint);
+            return;
         }
 
-        //canMove = false;
-        //animator.SetTrigger("die");
-        //playerCollider.enabled = false;
+        IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+        if(damagable != null)
+        {
+            int damagePoint = damagable.GetDamagePoint();
+            if (damagePoint <= pointsCount)
+            {
+                damagable.Damage();
+                UpdatePoint(-damagePoint);
+            }
+            else
+            {
+                Die();
+            }
+
+            return;
+        }
+
+       
+    }
+
+    private void Die()
+    {
+        canMove = false;
+        animator.SetTrigger("die");
+        playerCollider.enabled = false;
         //rb.useGravity = false;
     }
 

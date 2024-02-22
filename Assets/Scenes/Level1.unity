@@ -323,6 +323,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finger: {fileID: 167144277}
+--- !u!1 &285814178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 815968824502460565, guid: 29e559902f99f2349814b43d0fe54c1c, type: 3}
+  m_PrefabInstance: {fileID: 1119423192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &396606172
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +890,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 396606173}
+--- !u!1 &627027830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7529711470921518597, guid: 29e559902f99f2349814b43d0fe54c1c, type: 3}
+  m_PrefabInstance: {fileID: 1119423192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1226,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 0.7, z: 100}
   m_Center: {x: 0, y: -0.35, z: 50}
+--- !u!114 &868965521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5021960387756445836, guid: 29e559902f99f2349814b43d0fe54c1c, type: 3}
+  m_PrefabInstance: {fileID: 1119423192}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &908606751
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,6 +2139,27 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b14268cf635933948a37ef9fa766aedc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e605e6bf09926dc409e4925576eb2780, type: 3}
+--- !u!1 &1840137816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4971014254816295402, guid: 29e559902f99f2349814b43d0fe54c1c, type: 3}
+  m_PrefabInstance: {fileID: 1119423192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1840137818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840137816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c6b615071ea92429ac4788e21fbefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePoint: 3
+  damagePointText: {fileID: 868965521}
+  completeBlock: {fileID: 627027830}
+  brockenBlock: {fileID: 285814178}
 --- !u!4 &1999634973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 605473224979192891, guid: e605e6bf09926dc409e4925576eb2780, type: 3}
@@ -4487,7 +4529,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8839115407078844391}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.2
   m_Height: 1.5
