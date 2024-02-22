@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         if(consumable != null)
         {
             int consumePoint = consumable.Consume();
-            UpdatePoint(consumePoint);
+            UpdatePoint(pointsCount + consumePoint);
             return;
         }
 
@@ -101,17 +101,23 @@ public class PlayerController : MonoBehaviour
             if (damagePoint <= pointsCount)
             {
                 damagable.Damage();
-                UpdatePoint(-damagePoint);
+                UpdatePoint(pointsCount - damagePoint);
             }
             else
             {
                 Die();
             }
-
             return;
         }
 
-       
+        IPointScorer pointScorer = other.gameObject.GetComponent<IPointScorer>();
+        if(pointScorer != null)
+        {
+            int calculatedPoint = pointScorer.GetIncrementedPoints(pointsCount);
+            UpdatePoint(calculatedPoint);
+        }
+
+
     }
 
     private void Die()
@@ -119,12 +125,12 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         animator.SetTrigger("die");
         playerCollider.enabled = false;
-        //rb.useGravity = false;
     }
 
     public void UpdatePoint(int points)
     {
-        pointsCount += points;
+        pointsCount = points;
+        pointsCount = Mathf.Clamp(pointsCount, 0, points);
         counterText.text = pointsCount.ToString();
     }
 }
