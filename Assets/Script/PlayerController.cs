@@ -8,22 +8,28 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float xLimit;
-    [SerializeField] private float swipeSpeed;
-
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider playerCollider;
+    [SerializeField] private ParticleSystem stunnedEffect;
 
-    [SerializeField] private TextMeshPro counterText;
+    [Header("Points Counter")]
+    [SerializeField] private GameObject pointsCounter;
+    [SerializeField] private TextMeshPro pointsCounterText;
+
+    [Space(10)]
+    [SerializeField] private float xLimit;
+    [SerializeField] private float swipeSpeed;
+    [SerializeField] private float speed = 5;
+
+    [Space(10)]
+    [SerializeField] private PathCreator pathCreator;
+    [SerializeField] private EndOfPathInstruction endOfPathInstruction;
+
 
     private Vector3 startPosition;
     private Vector3 endPosition;
     private Vector3 prevPosition;
-
-    [SerializeField] private PathCreator pathCreator;
-    [SerializeField] private EndOfPathInstruction endOfPathInstruction;
-    [SerializeField] private float speed = 5;
 
     private float distanceTravelled;
     private float xMovement;
@@ -31,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private bool init;
     private int pointsCount;
+
 
     private void Start()
     {
@@ -125,12 +132,14 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         animator.SetTrigger("die");
         playerCollider.enabled = false;
+        stunnedEffect.gameObject.SetActive(true);
+        pointsCounter.SetActive(false);
     }
 
     public void UpdatePoint(int points)
     {
         pointsCount = points;
         pointsCount = Mathf.Clamp(pointsCount, 0, points);
-        counterText.text = pointsCount.ToString();
+        pointsCounterText.text = pointsCount.ToString();
     }
 }

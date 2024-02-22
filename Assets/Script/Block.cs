@@ -11,6 +11,8 @@ public class Block : MonoBehaviour, IDamagable
     [SerializeField] private GameObject completeBlock;
     [SerializeField] private GameObject brockenBlock;
 
+    [SerializeField] private ParticleSystem blockBreakEffect;
+
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class Block : MonoBehaviour, IDamagable
     {
         completeBlock.SetActive(false);
         brockenBlock.SetActive(true);
+        blockBreakEffect.Play();
     }
 
     public int GetDamagePoint()
