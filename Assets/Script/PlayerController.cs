@@ -74,12 +74,14 @@ public class PlayerController : MonoBehaviour
                     prevPosition = endPosition;
                 }
 
-                if (transform.position.z >= pathCreator.path.length)
+                if (distanceTravelled >= pathCreator.path.length)
                 {
                     canMove = false;
                     animator.SetTrigger("victory");
                     animator.SetBool("run", false);
                 }
+
+                UIController.instance.UpdateProgressBar(distanceTravelled / pathCreator.path.length);
             }
         }
     }
@@ -116,8 +118,6 @@ public class PlayerController : MonoBehaviour
             int calculatedPoint = pointScorer.GetIncrementedPoints(pointsCount);
             UpdatePoint(calculatedPoint);
         }
-
-
     }
 
     private void Die()
