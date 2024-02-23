@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LevelButton : MonoBehaviour
@@ -16,6 +15,6 @@ public class LevelButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        SceneManager.LoadScene(levelNumber);
+        SceneLoader.Instance.LoadScene(levelNumber);
     }
 }
