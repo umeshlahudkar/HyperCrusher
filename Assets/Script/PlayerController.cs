@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
         IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
         if(damagable != null)
         {
+            CameraController.Instance.ShakeCamera();
             int damagePoint = damagable.GetDamagePoint();
             if (damagePoint <= pointsCount)
             {
