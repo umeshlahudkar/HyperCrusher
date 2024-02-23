@@ -17,8 +17,13 @@ public class Gate : MonoBehaviour, IPointScorer
 
     [SerializeField] private PointsOperationType pointsOperationType;
     [SerializeField] private int points;
+
     [SerializeField] private TextMeshPro pointsText;
     [SerializeField] private GameObject forceField;
+    [SerializeField] private MeshRenderer forceFirldMesh;
+
+    [SerializeField] private Material positivePointsMaterial;
+    [SerializeField] private Material negativePointsMaterial;
 
 
     private void Start()
@@ -34,18 +39,22 @@ public class Gate : MonoBehaviour, IPointScorer
         {
             case PointsOperationType.Addition:
                 txt = "+";
+                forceFirldMesh.material = positivePointsMaterial;
                 break;
 
             case PointsOperationType.Subtraction:
                 txt = "-";
+                forceFirldMesh.material = negativePointsMaterial;
                 break;
 
             case PointsOperationType.Multiplication:
                 txt = "\u00D7";
+                forceFirldMesh.material = positivePointsMaterial;
                 break;
 
             case PointsOperationType.Division:
                 txt = "\u00F7";
+                forceFirldMesh.material = negativePointsMaterial;
                 break;
         }
 
