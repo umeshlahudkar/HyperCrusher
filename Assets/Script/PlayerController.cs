@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
                     canMove = false;
                     animator.SetTrigger("victory");
                     animator.SetBool("run", false);
+                    AudioManager.Instance.PlayGameWinSound();
                 }
 
                 UIController.instance.UpdateProgressBar(distanceTravelled / pathCreator.path.length);
@@ -114,6 +115,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.PlayBlockHitSound();
                 Die();
             }
             return;
@@ -123,6 +125,16 @@ public class PlayerController : MonoBehaviour
         if(pointScorer != null)
         {
             int calculatedPoint = pointScorer.GetIncrementedPoints(pointsCount);
+
+            if(calculatedPoint > pointsCount)
+            {
+                AudioManager.Instance.PlayPointAddSound();
+            }
+            else
+            {
+                AudioManager.Instance.PlayPointDeductSound();
+            }
+
             UpdatePoint(calculatedPoint);
         }
     }
@@ -134,6 +146,7 @@ public class PlayerController : MonoBehaviour
         playerCollider.enabled = false;
         stunnedEffect.gameObject.SetActive(true);
         pointsCounter.SetActive(false);
+        AudioManager.Instance.PlayGameLoseSound();
     }
 
     public void UpdatePoint(int points)

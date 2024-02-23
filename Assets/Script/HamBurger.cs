@@ -7,6 +7,7 @@ public class HamBurger : MonoBehaviour, IConsumable
 
     public int Consume()
     {
+        AudioManager.Instance.PlayItemConsumeSound();
         transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => 
         {
             Destroy(gameObject);

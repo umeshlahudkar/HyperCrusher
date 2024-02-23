@@ -18,6 +18,7 @@ public class Gate : MonoBehaviour, IPointScorer
     [SerializeField] private PointsOperationType pointsOperationType;
     [SerializeField] private int points;
     [SerializeField] private TextMeshPro pointsText;
+    [SerializeField] private GameObject forceField;
 
 
     private void Start()
@@ -74,6 +75,8 @@ public class Gate : MonoBehaviour, IPointScorer
                 calculatedPoints = currentPoints / points;
                 break;
         }
+
+        forceField.SetActive(false);
 
         return calculatedPoints;
     }

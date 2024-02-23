@@ -24,6 +24,9 @@ public class Block : MonoBehaviour, IDamagable
         completeBlock.SetActive(false);
         brockenBlock.SetActive(true);
         blockBreakEffect.Play();
+        AudioManager.Instance.PlayBlockBreakSound();
+
+        Destroy(gameObject, 2f);
     }
 
     public int GetDamagePoint()
