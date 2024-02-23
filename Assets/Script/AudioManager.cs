@@ -75,6 +75,18 @@ public class AudioManager : Singleton<AudioManager>
         UpdateSFXAudioSourceVolume(sfxVolume);
     }
 
+    public void ToggleMusicMute(bool status)
+    {
+        isBgMute = status;
+        bgAudioSoure.mute = isBgMute;
+    }
+
+    public void ToggleSoundMute(bool status)
+    {
+        isSfxMute = status;
+        MuteSFXAudioSource(isSfxMute);
+    }
+
     public void PlayPointAddSound()
     {
         if(!isSfxMute)

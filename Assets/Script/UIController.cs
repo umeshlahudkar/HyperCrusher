@@ -1,19 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIController : MonoBehaviour
+public class UIController : Singleton<UIController>
 {
-    public static UIController instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
     [SerializeField] private GameObject finger;
+    [SerializeField] private GameObject pauseScreen;
 
     [Header("Progress Bar")]
     [SerializeField] private Slider progressBar;
@@ -27,8 +19,14 @@ public class UIController : MonoBehaviour
 
     public void OnSwipeFingerClick()
     {
-        GameManager.instance.gameState = GameState.Playing;
+        GameManager.Instance.gameState = GameState.Playing;
         finger.SetActive(false);
+    }
+
+    public void OnPauseButtonClick()
+    {
+        GameManager.Instance.gameState = GameState.Paused;
+        pauseScreen.SetActive(true);
     }
 
     public void UpdateProgressBar(float value)

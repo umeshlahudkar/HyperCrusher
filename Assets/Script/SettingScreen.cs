@@ -25,8 +25,8 @@ public class SettingScreen : MonoBehaviour
         settingPanel.position = new Vector3(settingPanel.position.x, (Screen.height + (settingPanel.rect.height / 2)), 0);
         settingPanel.DOMove(initialPosition, 0.2f);
 
-        musicVolumeSlider.value = AudioManager.Instance.BgVolume;
-        soundVolumeSlider.value = AudioManager.Instance.SFXVolume;
+        musicVolumeSlider.value = (AudioManager.Instance.IsBgMute) ? 0 : AudioManager.Instance.BgVolume;
+        soundVolumeSlider.value = (AudioManager.Instance.IsSFXMute) ? 0 : AudioManager.Instance.SFXVolume;
     }
 
     public void OnMusicSliderValueChanged()

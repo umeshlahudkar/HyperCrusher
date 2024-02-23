@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.instance.gameState == GameState.Playing)
+        if(GameManager.Instance.gameState == GameState.Playing)
         {
             if(!init)
             {
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
                     AudioManager.Instance.PlayGameWinSound();
                 }
 
-                UIController.instance.UpdateProgressBar(distanceTravelled / pathCreator.path.length);
+                UIController.Instance.UpdateProgressBar(distanceTravelled / pathCreator.path.length);
             }
         }
     }
