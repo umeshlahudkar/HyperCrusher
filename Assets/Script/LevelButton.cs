@@ -16,6 +16,6 @@ public class LevelButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        Debug.Log("Level " + levelNumber);
+        SceneManager.LoadScene(levelNumber);
     }
 }

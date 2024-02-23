@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
@@ -20,52 +18,130 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private AudioClip gameWinClip;
     [SerializeField] private AudioClip gameLoseClip;
 
+    private float bgVolume = 0.5f;
+    private float sfxVolume = 0.5f;
+
+    private bool isBgMute = false;
+    private bool isSfxMute = false;
+
+    public float BgVolume { get { return bgVolume; } }
+    public float SFXVolume { get { return sfxVolume; } }
+
+    public bool IsBgMute { get { return isBgMute; } }
+    public bool IsSFXMute { get { return isSfxMute; } }
+
+    private void Start()
+    {
+        bgAudioSoure.mute = isBgMute;
+        MuteSFXAudioSource(isSfxMute);
+
+        bgAudioSoure.volume = bgVolume;
+        UpdateSFXAudioSourceVolume(sfxVolume);
+    }
+
+    private void MuteSFXAudioSource(bool status)
+    {
+        pointsAudioSoure.mute = status;
+        consumeAudioSoure.mute = status;
+        blockAudioSoure.mute = status;
+        gameOverAudioSoure.mute = status;
+    }
+
+    private void UpdateSFXAudioSourceVolume(float volume)
+    {
+        pointsAudioSoure.volume = volume;
+        consumeAudioSoure.volume = volume;
+        blockAudioSoure.volume = volume;
+        gameOverAudioSoure.volume = volume;
+    }
+
+    public void UpdateBgVolume(float volume)
+    {
+        isBgMute = (volume <= 0);
+        bgAudioSoure.mute = isBgMute;
+
+        bgVolume = volume;
+        bgVolume = Mathf.Clamp(bgVolume, 0, 1);
+        bgAudioSoure.volume = bgVolume;
+    }
+
+    public void UpdateSFXVolume(float volume)
+    {
+        isSfxMute = (volume <= 0);
+        MuteSFXAudioSource(isSfxMute);
+
+        sfxVolume = volume;
+        sfxVolume = Mathf.Clamp(sfxVolume, 0, 1);
+        UpdateSFXAudioSourceVolume(sfxVolume);
+    }
+
     public void PlayPointAddSound()
     {
-        pointsAudioSoure.Stop();
-        pointsAudioSoure.clip = pointsAddClip;
-        pointsAudioSoure.Play();
+        if(!isSfxMute)
+        {
+            pointsAudioSoure.Stop();
+            pointsAudioSoure.clip = pointsAddClip;
+            pointsAudioSoure.Play();
+        }
     }
 
     public void PlayPointDeductSound()
     {
-        pointsAudioSoure.Stop();
-        pointsAudioSoure.clip = pointsDeductClip;
-        pointsAudioSoure.Play();
+        if (!isSfxMute)
+        {
+            pointsAudioSoure.Stop();
+            pointsAudioSoure.clip = pointsDeductClip;
+            pointsAudioSoure.Play();
+        }
     }
 
     public void PlayItemConsumeSound()
     {
-        consumeAudioSoure.Stop();
-        consumeAudioSoure.clip = itemConsumeClip;
-        consumeAudioSoure.Play();
+        if (!isSfxMute)
+        {
+            consumeAudioSoure.Stop();
+            consumeAudioSoure.clip = itemConsumeClip;
+            consumeAudioSoure.Play();
+        }
     }
 
     public void PlayBlockBreakSound()
     {
-        blockAudioSoure.Stop();
-        blockAudioSoure.clip = blockBreakClip;
-        blockAudioSoure.Play();
+        if (!isSfxMute)
+        {
+            blockAudioSoure.Stop();
+            blockAudioSoure.clip = blockBreakClip;
+            blockAudioSoure.Play();
+        }
     }
 
     public void PlayBlockHitSound()
     {
-        blockAudioSoure.Stop();
-        blockAudioSoure.clip = blockhitClip;
-        blockAudioSoure.Play();
+        if (!isSfxMute)
+        {
+            blockAudioSoure.Stop();
+            blockAudioSoure.clip = blockhitClip;
+            blockAudioSoure.Play();
+        }
     }
 
     public void PlayGameWinSound()
     {
-        gameOverAudioSoure.Stop();
-        gameOverAudioSoure.clip = gameWinClip;
-        gameOverAudioSoure.Play();
+        if (!isSfxMute)
+        {
+            gameOverAudioSoure.Stop();
+            gameOverAudioSoure.clip = gameWinClip;
+            gameOverAudioSoure.Play();
+        }
     }
 
     public void PlayGameLoseSound()
     {
-        gameOverAudioSoure.Stop();
-        gameOverAudioSoure.clip = gameLoseClip;
-        gameOverAudioSoure.Play();
+        if (!isSfxMute)
+        {
+            gameOverAudioSoure.Stop();
+            gameOverAudioSoure.clip = gameLoseClip;
+            gameOverAudioSoure.Play();
+        }
     }
 }
