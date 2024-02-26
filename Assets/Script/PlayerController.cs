@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
                     canMove = false;
                     animator.SetTrigger("victory");
                     animator.SetBool("run", false);
-                    AudioManager.Instance.PlayGameWinSound();
+                    GameManager.Instance.OnGameWin();
                 }
 
                 UIController.Instance.UpdateProgressBar(distanceTravelled / pathCreator.path.length);
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         playerCollider.enabled = false;
         stunnedEffect.gameObject.SetActive(true);
         pointsCounter.SetActive(false);
-        AudioManager.Instance.PlayGameLoseSound();
+        GameManager.Instance.OnGameLose();
     }
 
     public void UpdatePoint(int points)

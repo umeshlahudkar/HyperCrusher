@@ -11,6 +11,10 @@ public class UIController : Singleton<UIController>
     [SerializeField] private Slider progressBar;
     [SerializeField] private TextMeshProUGUI levelNumberText;
 
+    [Header("Game Over screen")]
+    [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject loseScreen;
+
     private void Start()
     {
         finger.SetActive(true);
@@ -30,11 +34,21 @@ public class UIController : Singleton<UIController>
     public void OnPauseButtonClick()
     {
         GameManager.Instance.PauseGame();
-        pauseScreen.SetActive(true);
+        pauseScreen.Activate();
     }
 
     public void UpdateProgressBar(float value)
     {
         progressBar.value = value;
+    }
+
+    public void ToggleGameWinScreen(bool status)
+    {
+        winScreen.SetActive(status);
+    }
+
+    public void ToggleGameLoseScreen(bool status)
+    {
+        loseScreen.SetActive(status);
     }
 }

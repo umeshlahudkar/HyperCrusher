@@ -42,6 +42,20 @@ public class GameManager : Singleton<GameManager>
         SetGameState( hasClickedOnFinger ? GameState.Playing : GameState.waiting);
     }
 
+    public void OnGameWin()
+    {
+        AudioManager.Instance.PlayGameWinSound();
+        SetGameState(GameState.Ending);
+        UIController.Instance.ToggleGameWinScreen(true);
+    }
+
+    public void OnGameLose()
+    {
+        AudioManager.Instance.PlayGameLoseSound();
+        SetGameState(GameState.Ending);
+        UIController.Instance.ToggleGameLoseScreen(true);
+    }
+
     public void ResetGame()
     {
         SetGameState(GameState.waiting);

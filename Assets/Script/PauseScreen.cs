@@ -20,8 +20,10 @@ public class PauseScreen : MonoBehaviour
 
     private void SetScreen()
     {
-        thisTransform.localPosition = new Vector3(-Screen.width, 0, 0);
-        thisTransform.DOLocalMove(Vector3.zero, 0.2f);
+        //thisTransform.localPosition = new Vector3(-Screen.width, 0, 0);
+        //thisTransform.DOLocalMove(Vector3.zero, 0.2f);
+
+        //gameObject.Activate();
 
         SetMusicButtonImg();
         SetSoundButtonImg();
@@ -29,10 +31,15 @@ public class PauseScreen : MonoBehaviour
 
     public void OnResumeButtonClick()
     {
-        thisTransform.DOLocalMove(new Vector3(-Screen.width, 0, 0), 0.2f).OnComplete(()=>
+        //thisTransform.DOLocalMove(new Vector3(-Screen.width, 0, 0), 0.2f).OnComplete(()=>
+        //{
+        //    GameManager.Instance.UnPauseGame();
+        //    gameObject.SetActive(false);
+        //});
+
+        gameObject.Deactivate(0.2f, MovementType.LeftToRight, ()=> 
         {
             GameManager.Instance.UnPauseGame();
-            gameObject.SetActive(false);
         });
     }
 
