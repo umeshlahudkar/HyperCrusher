@@ -19,13 +19,17 @@ public class UIController : Singleton<UIController>
 
     public void OnSwipeFingerClick()
     {
-        GameManager.Instance.gameState = GameState.Playing;
-        finger.SetActive(false);
+        GameManager.Instance.StartGame();
+    }
+
+    public void ToggleSwipeFinger(bool status)
+    {
+        finger.SetActive(status);
     }
 
     public void OnPauseButtonClick()
     {
-        GameManager.Instance.gameState = GameState.Paused;
+        GameManager.Instance.PauseGame();
         pauseScreen.SetActive(true);
     }
 

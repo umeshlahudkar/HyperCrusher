@@ -44,9 +44,19 @@ public class PlayerController : MonoBehaviour
         UpdatePoint(0);
     }
 
+    public void OnGamePause()
+    {
+        animator.SetBool("idle", true);
+    }
+
+    public void OnGameUnpause()
+    {
+        animator.SetBool("idle", false);
+    }
+
     private void Update()
     {
-        if(GameManager.Instance.gameState == GameState.Playing)
+        if(GameManager.Instance.GameState == GameState.Playing)
         {
             if(!init)
             {

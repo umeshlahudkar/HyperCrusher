@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -33,12 +31,14 @@ public class PauseScreen : MonoBehaviour
     {
         thisTransform.DOLocalMove(new Vector3(-Screen.width, 0, 0), 0.2f).OnComplete(()=>
         {
+            GameManager.Instance.UnPauseGame();
             gameObject.SetActive(false);
         });
     }
 
     public void OnHomeButtonClick()
     {
+        GameManager.Instance.ResetGame();
         SceneLoader.Instance.LoadScene(0);
     }
 
@@ -65,5 +65,4 @@ public class PauseScreen : MonoBehaviour
     {
         soundButtonImg.sprite = (AudioManager.Instance.IsSFXMute) ? soundOffSprite : soundOnSprite;
     }
-
 }
