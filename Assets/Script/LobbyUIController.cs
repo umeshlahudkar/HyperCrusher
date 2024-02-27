@@ -10,21 +10,14 @@ public class LobbyUIController : MonoBehaviour
 
     public void OnPlayButtonClick()
     {
-        levelScreen.Activate(0.2f, MovementType.LeftToRight, () => mainMenuScreen.SetActive(false));
-
+        levelScreen.Activate(0.2f, MovementType.LeftToRight);
     }
 
     public void OnSettingButtonClick()
     {
         settingScreen.SetActive(true);
     }
-
-    public void DisbleLevelScreen()
-    {
-        mainMenuScreen.SetActive(true);
-        levelScreen.Deactivate(0.2f, MovementType.RightToLeft);
-    }
-
+  
     public void OnQuitButtonClick()
     {
         Application.Quit();

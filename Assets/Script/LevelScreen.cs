@@ -22,6 +22,6 @@ public class LevelScreen : MonoBehaviour
 
     public void OnBackButtonClick()
     {
-        lobbyUIController.DisbleLevelScreen();
+        gameObject.Deactivate(0.2f, MovementType.RightToLeft);
     }
 }
