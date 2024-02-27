@@ -22,6 +22,6 @@ public class LevelScreen : MonoBehaviour
 
     public void OnBackButtonClick()
     {
-        lobbyUIController.ToggleLevelScreen(false);
+        lobbyUIController.DisbleLevelScreen();
     }
 }
