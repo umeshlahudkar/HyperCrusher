@@ -22,8 +22,10 @@ public class SettingScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        settingPanel.position = new Vector3(settingPanel.position.x, (Screen.height + (settingPanel.rect.height / 2)), 0);
-        settingPanel.DOMove(initialPosition, 0.2f);
+        //settingPanel.position = new Vector3(settingPanel.position.x, (Screen.height + (settingPanel.rect.height / 2)), 0);
+        //settingPanel.DOMove(initialPosition, 0.2f);
+
+        settingPanel.gameObject.Activate(0.2f, MovementType.UpToDown);
 
         musicVolumeSlider.value = (AudioManager.Instance.IsBgMute) ? 0 : AudioManager.Instance.BgVolume;
         soundVolumeSlider.value = (AudioManager.Instance.IsSFXMute) ? 0 : AudioManager.Instance.SFXVolume;
@@ -41,10 +43,12 @@ public class SettingScreen : MonoBehaviour
 
     public void OnCloseButtonClick()
     {
-        settingPanel.DOMove(new Vector3(settingPanel.position.x, (Screen.height + (settingPanel.rect.height / 2)), 0), 0.2f).OnComplete(() =>
-        {
-            settingPanel.position = initialPosition;
-            gameObject.SetActive(false);
-        });
+        //settingPanel.DOMove(new Vector3(settingPanel.position.x, (Screen.height + (settingPanel.rect.height / 2)), 0), 0.2f).OnComplete(() =>
+        //{
+        //    settingPanel.position = initialPosition;
+        //    gameObject.SetActive(false);
+        //});
+
+        settingPanel.gameObject.Deactivate(0.2f, MovementType.DownToUp, ()=>gameObject.SetActive(false));
     }
 }
