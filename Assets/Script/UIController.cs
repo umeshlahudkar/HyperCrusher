@@ -42,13 +42,23 @@ public class UIController : Singleton<UIController>
         progressBar.value = value;
     }
 
-    public void ToggleGameWinScreen(bool status)
+    public void OpenGameWinScreen()
     {
-        winScreen.SetActive(status);
+        winScreen.Activate();
     }
 
-    public void ToggleGameLoseScreen(bool status)
+    public void CloseGameWinScreen()
     {
-        loseScreen.SetActive(status);
+        winScreen.Deactivate();
+    }
+
+    public void OpenGameLoseScreen()
+    {
+        loseScreen.Activate();
+    }
+
+    public void CloseGameLoseScreen()
+    {
+        loseScreen.Deactivate();
     }
 }

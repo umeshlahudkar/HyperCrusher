@@ -46,14 +46,14 @@ public class GameManager : Singleton<GameManager>
     {
         AudioManager.Instance.PlayGameWinSound();
         SetGameState(GameState.Ending);
-        UIController.Instance.ToggleGameWinScreen(true);
+        UIController.Instance.OpenGameWinScreen();
     }
 
     public void OnGameLose()
     {
         AudioManager.Instance.PlayGameLoseSound();
         SetGameState(GameState.Ending);
-        UIController.Instance.ToggleGameLoseScreen(true);
+        UIController.Instance.OpenGameLoseScreen();
     }
 
     public void ResetGame()
