@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         {
             int calculatedPoint = pointScorer.GetIncrementedPoints(pointsCount);
 
-            CameraController.Instance.ShakeCamera();
+            //CameraController.Instance.ShakeCamera();
 
             if(calculatedPoint > pointsCount)
             {
