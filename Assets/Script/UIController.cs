@@ -40,6 +40,11 @@ public class UIController : Singleton<UIController>
         upperUI.Activate(0.2f, MovementType.UpToDown);
     }
 
+    public void DisableUpperUI()
+    {
+        upperUI.Deactivate(0.2f, MovementType.DownToUp);
+    }
+
     public void OnPauseButtonClick()
     {
         GameManager.Instance.PauseGame();

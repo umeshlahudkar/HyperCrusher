@@ -55,6 +55,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGameWin()
     {
+        UIController.Instance.DisableUpperUI();
         AudioManager.Instance.PlayGameWinSound();
         SetGameState(GameState.Ending);
         UIController.Instance.OpenGameWinScreen();
@@ -62,6 +63,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGameLose()
     {
+        UIController.Instance.DisableUpperUI();
         AudioManager.Instance.PlayGameLoseSound();
         SetGameState(GameState.Ending);
         UIController.Instance.OpenGameLoseScreen();
