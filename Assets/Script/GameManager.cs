@@ -58,7 +58,7 @@ public class GameManager : Singleton<GameManager>
         UIController.Instance.DisableUpperUI();
         AudioManager.Instance.PlayGameWinSound();
         SetGameState(GameState.Ending);
-        UIController.Instance.OpenGameWinScreen();
+        Invoke(nameof(OpenGameWinScreen), 3f);
     }
 
     public void OnGameLose()
@@ -66,6 +66,16 @@ public class GameManager : Singleton<GameManager>
         UIController.Instance.DisableUpperUI();
         AudioManager.Instance.PlayGameLoseSound();
         SetGameState(GameState.Ending);
+        Invoke(nameof(OpenGameLoseScreen), 3f);
+    }
+
+    private void OpenGameWinScreen()
+    {
+        UIController.Instance.OpenGameWinScreen();
+    }
+
+    private void OpenGameLoseScreen()
+    {
         UIController.Instance.OpenGameLoseScreen();
     }
 

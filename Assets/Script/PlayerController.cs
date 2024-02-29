@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
                     canMove = false;
                     animator.SetTrigger("victory");
                     animator.SetBool("run", false);
+
                     GameManager.Instance.OnGameWin();
                 }
 
