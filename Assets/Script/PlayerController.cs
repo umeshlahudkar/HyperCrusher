@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     private bool init;
     private int pointsCount;
 
+    private float elapcedTime = 0;
+    private float collisionTime = 0.2f;
+
 
     private void Start()
     {
@@ -69,6 +72,8 @@ public class PlayerController : MonoBehaviour
             {
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -102,11 +107,21 @@ public class PlayerController : MonoBehaviour
 
                 UIController.Instance.UpdateProgressBar(distanceTravelled / pathCreator.path.length);
             }
+
+            elapcedTime += Time.deltaTime;
+            if(elapcedTime > collisionTime)
+            {
+                elapcedTime = collisionTime;
+            }
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        if(elapcedTime < collisionTime) { return; }
+
+        elapcedTime = 0;
+
         IConsumable consumable = other.gameObject.GetComponent<IConsumable>();
         if(consumable != null)
         {

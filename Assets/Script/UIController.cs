@@ -108,8 +108,10 @@ public class UIController : Singleton<UIController>
             CloseGameLoseScreen();
         }
 
-        int nextLevel = (SceneLoader.Instance.ActiveSceneIndex + 1) % 5;
+        int nextLevel = (SceneLoader.Instance.ActiveSceneIndex + 1);
+        if(nextLevel > 2 || nextLevel == 0) { nextLevel = 1; }
+
         GameManager.Instance.CurrentLevel = nextLevel;
-        SceneLoader.Instance.LoadScene(SceneLoader.Instance.ActiveSceneIndex);
+        SceneLoader.Instance.LoadScene(nextLevel);
     }
 }

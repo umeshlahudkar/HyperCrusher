@@ -36,6 +36,7 @@ public class CameraController : Singleton<CameraController>
         else
         {
             transform.position = followTarget.position;
+            transform.rotation = followTarget.rotation;
         }
     }
 
