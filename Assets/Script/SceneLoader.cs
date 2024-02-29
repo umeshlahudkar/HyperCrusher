@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using UnityEngine.SceneManagement;
-
 
 public class SceneLoader : Singleton<SceneLoader>
 {
     [SerializeField] private Image faderImage;
     private Color originalColor;
+
+    public delegate void SceneLoad();
+    public static SceneLoad OnSceneLoad;
 
     public void LoadScene(int index)
     {
@@ -26,6 +27,8 @@ public class SceneLoader : Singleton<SceneLoader>
         yield return StartCoroutine(FadeOut());
 
         yield return SceneManager.LoadSceneAsync(index);
+
+        OnSceneLoad?.Invoke();
        
         yield return StartCoroutine(FadeIn());
 

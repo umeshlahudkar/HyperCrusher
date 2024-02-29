@@ -11,11 +11,22 @@ public class GameManager : Singleton<GameManager>
 
     public GameState GameState { get { return gameState; } }
 
+    private void OnEnable()
+    {
+        SceneLoader.OnSceneLoad += OnSceneLoad;
+    }
+
+    private void OnSceneLoad()
+    {
+        UIController.Instance.SetUpLevelUI(1);
+    }
+
     public void StartGame()
     {
         hasClickedOnFinger = true;
         SetGameState(GameState.Playing);
         UIController.Instance.ToggleSwipeFinger(false);
+        UIController.Instance.EnableUpperUI();
     }
 
     private void SetPlayerController()
@@ -60,5 +71,10 @@ public class GameManager : Singleton<GameManager>
     {
         SetGameState(GameState.waiting);
         hasClickedOnFinger = false;
+    }
+
+    private void OnDisable()
+    {
+        SceneLoader.OnSceneLoad -= OnSceneLoad;
     }
 }

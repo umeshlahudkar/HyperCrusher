@@ -15,10 +15,14 @@ public class UIController : Singleton<UIController>
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject loseScreen;
 
-    private void Start()
+    [Header("Upper UI")]
+    [SerializeField] private GameObject upperUI;
+
+    public void SetUpLevelUI(int levelNumber)
     {
         finger.SetActive(true);
-        levelNumberText.text = 1.ToString();
+        upperUI.SetActive(false);
+        levelNumberText.text = levelNumber.ToString();
     }
 
     public void OnSwipeFingerClick()
@@ -29,6 +33,11 @@ public class UIController : Singleton<UIController>
     public void ToggleSwipeFinger(bool status)
     {
         finger.SetActive(status);
+    }
+
+    public void EnableUpperUI()
+    {
+        upperUI.Activate(0.2f, MovementType.UpToDown);
     }
 
     public void OnPauseButtonClick()
