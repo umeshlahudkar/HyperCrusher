@@ -8,6 +8,13 @@ public class GameManager : Singleton<GameManager>
     private PlayerController playerController;
 
     private bool hasClickedOnFinger = false;
+    private int currentLevel = 0;
+
+    public int CurrentLevel 
+    { 
+        get { return currentLevel; } 
+        set { currentLevel = value; }
+    }
 
     public GameState GameState { get { return gameState; } }
 
@@ -18,7 +25,10 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoad()
     {
-        UIController.Instance.SetUpLevelUI(1);
+        if(SceneLoader.Instance.ActiveSceneIndex != 0)
+        {
+            UIController.Instance.SetUpLevelUI(currentLevel);
+        }
     }
 
     public void StartGame()

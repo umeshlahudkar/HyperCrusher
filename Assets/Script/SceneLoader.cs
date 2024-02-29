@@ -7,12 +7,16 @@ public class SceneLoader : Singleton<SceneLoader>
 {
     [SerializeField] private Image faderImage;
     private Color originalColor;
+    private int activeSceneIndex;
+
+    public int ActiveSceneIndex { get { return activeSceneIndex; } }
 
     public delegate void SceneLoad();
     public static SceneLoad OnSceneLoad;
 
     public void LoadScene(int index)
     {
+        activeSceneIndex = index;
         StartCoroutine(Load(index));
     }
 

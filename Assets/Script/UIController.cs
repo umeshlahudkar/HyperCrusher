@@ -75,4 +75,41 @@ public class UIController : Singleton<UIController>
     {
         loseScreen.Deactivate();
     }
+
+    public void OnRetryButtonClick()
+    {
+        if(winScreen.activeSelf)
+        {
+            CloseGameWinScreen();
+        }
+
+        if(loseScreen.activeSelf)
+        {
+            CloseGameLoseScreen();
+        }
+
+        SceneLoader.Instance.LoadScene(SceneLoader.Instance.ActiveSceneIndex);
+    }
+
+    public void OnHomeButtonClick()
+    {
+        SceneLoader.Instance.LoadScene(0);
+    }
+
+    public void OnNextButtonClick()
+    {
+        if (winScreen.activeSelf)
+        {
+            CloseGameWinScreen();
+        }
+
+        if (loseScreen.activeSelf)
+        {
+            CloseGameLoseScreen();
+        }
+
+        int nextLevel = (SceneLoader.Instance.ActiveSceneIndex + 1) % 5;
+        GameManager.Instance.CurrentLevel = nextLevel;
+        SceneLoader.Instance.LoadScene(SceneLoader.Instance.ActiveSceneIndex);
+    }
 }

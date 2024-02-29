@@ -15,6 +15,7 @@ public class LevelButton : MonoBehaviour
 
     public void OnButtonClick()
     {
+        GameManager.Instance.CurrentLevel = levelNumber;
         SceneLoader.Instance.LoadScene(levelNumber);
     }
 }
