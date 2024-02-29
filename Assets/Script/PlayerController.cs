@@ -137,6 +137,8 @@ public class PlayerController : MonoBehaviour
         {
             int calculatedPoint = pointScorer.GetIncrementedPoints(pointsCount);
 
+            CameraController.Instance.ShakeCamera();
+
             if(calculatedPoint > pointsCount)
             {
                 AudioManager.Instance.PlayPointAddSound();
