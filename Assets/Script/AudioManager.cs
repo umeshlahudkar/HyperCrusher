@@ -18,7 +18,7 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private AudioClip gameWinClip;
     [SerializeField] private AudioClip gameLoseClip;
 
-    private float bgVolume = 0.5f;
+    private float bgVolume = 0.2f;
     private float sfxVolume = 0.5f;
 
     private bool isBgMute = false;
